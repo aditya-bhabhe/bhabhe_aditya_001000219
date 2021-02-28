@@ -207,13 +207,9 @@ public class Main {
         
         PatientDirectory pd1 = new PatientDirectory();
         pd1.addPatient(p1);
-        pd1.addPatient(p2);
         pd1.addPatient(p3);
         pd1.addPatient(p4);
         pd1.addPatient(p5);
-        pd1.addPatient(p6);
-        pd1.addPatient(p7);
-        pd1.addPatient(p8);
         
         
         System.out.println("Total Patients in directory: "+pd1.totalPatient());
