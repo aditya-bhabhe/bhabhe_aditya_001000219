@@ -113,7 +113,7 @@ public class Main {
         patientDir.setPatient(p4);
         
         patientDir.printPatients();
-        
+        System.out.println("Total No of Patients: " + patientDir.totalPatient());
     }
     
 }
