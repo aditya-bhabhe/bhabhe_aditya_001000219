@@ -15,10 +15,20 @@ import Business.WorkQueue.WorkQueue;
 public class UserAccount {
     
     private String username;
+    private String name;
     private String password;
     private Employee employee;
     private Role role;
     private WorkQueue workQueue;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
 
     public UserAccount() {
         workQueue = new WorkQueue();
