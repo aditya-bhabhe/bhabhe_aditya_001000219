@@ -53,6 +53,7 @@ public class RestaurantDirectory {
     }
     
     public void updateRestaurant(Restaurant restaurant, String restaurantName,String number, String address){
+        System.out.println("aaaa:" + restaurantName);
         restaurant.setRestaurantName(restaurantName);
         restaurant.setRestaurantNumber(number);
         restaurant.setRestaurantAddress(address);
@@ -60,7 +61,7 @@ public class RestaurantDirectory {
     
     public void deleteRestaurant(String userName){
         for(int i = 0; i < restaurantDirectory.size(); i++){
-            if(restaurantDirectory.get(i).getRestaurantUserName() == userName){
+            if(restaurantDirectory.get(i).getRestaurantUserName().equals(userName) ){
                 restaurantDirectory.remove(i);
             }
         }
@@ -75,5 +76,15 @@ public class RestaurantDirectory {
     
     public void removeMenu(Restaurant restaurant, Dish dish){
         restaurant.removeItem(dish);
+    }
+    
+    public Restaurant findRestaurant(String restaurantName){
+        System.out.println(restaurantName + "Saurabh");
+       for(Restaurant r : restaurantDirectory){
+            if(r.getRestaurantUserName().equals(restaurantName) ){
+                return r;
+            }
+        }
+       return null;
     }
 }

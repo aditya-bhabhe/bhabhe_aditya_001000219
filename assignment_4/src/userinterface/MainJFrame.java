@@ -95,11 +95,22 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void loginJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginJButtonActionPerformed
         // Get user name
-       UserAccount userAcc = system.getUserAccountDirectory().authenticateUser(userNameJTextField.getText(), userPasswordField.getText());
-       CardLayout card = (CardLayout) container.getLayout();
+       if(userNameJTextField.getText().equals("")){
+           JOptionPane.showMessageDialog(null, "Enter User Name");
+       }else if(userPasswordField.getText().equals("")){
+           JOptionPane.showMessageDialog(null, "Enter User Password");
+       }else{
+           UserAccount userAcc = system.getUserAccountDirectory().authenticateUser(userNameJTextField.getText(), userPasswordField.getText());
+           if(userAcc == null){
+               JOptionPane.showMessageDialog(null, "Invalid Credentials");
+           }else{
+               CardLayout card = (CardLayout) container.getLayout();
        container.add("Login", userAcc.getRole().createWorkArea(container, userAcc, system));
        card.next(container);
        logoutJButton.setEnabled(true);
+           }
+       
+       }  
     }//GEN-LAST:event_loginJButtonActionPerformed
 
     private void logoutJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutJButtonActionPerformed

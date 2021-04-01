@@ -25,7 +25,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         this.ecosystem = ecosystem;
         this.userAccount = userAccount;
       
-        //valueLabel.setText();
+        lblRestaurantName.setText(userAccount.getUsername());
     }
     
     /** This method is called from within the constructor to
@@ -44,7 +44,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         manageEmployeeJButton = new javax.swing.JButton();
         manageOrganizationJButton = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
-        valueLabel = new javax.swing.JLabel();
+        lblRestaurantName = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(214, 208, 200));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -93,8 +93,9 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         enterpriseLabel.setText("Restaurant Name:");
         add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 210, 30));
 
-        valueLabel.setText("<value>");
-        add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 210, 30));
+        lblRestaurantName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblRestaurantName.setText("<value>");
+        add(lblRestaurantName, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 210, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void userJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userJButtonActionPerformed
@@ -113,17 +114,20 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_manageEmployeeJButtonActionPerformed
 
     private void manageOrganizationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrganizationJButtonActionPerformed
-
+        OrderManagement manageorderJPanel = new OrderManagement(userProcessContainer, userAccount, ecosystem);
+       userProcessContainer.add("OrderManangement", manageorderJPanel);
+       CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+       layout.next(userProcessContainer);
     }//GEN-LAST:event_manageOrganizationJButtonActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblRestaurantName;
     private javax.swing.JButton manageEmployeeJButton;
     private javax.swing.JButton manageOrganizationJButton;
     private javax.swing.JButton userJButton;
-    private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables
     
 }

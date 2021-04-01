@@ -179,11 +179,16 @@ public class ManageRestaurant extends javax.swing.JPanel {
 
     private void btnRestaurantSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurantSaveActionPerformed
         // TODO add your handling code here:
-        ecosystem.getUserAccountDirectory().updateUserAccount(userAccount,txtCustomerName.getText(),txtCustomerUserName.getText(),txtCustomerPassword.getText());
+        if(txtCustomerName.getText().equals("") || txtCustomerUserName.getText().equals("") || txtCustomerPassword.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Please Enter all fields");
+        }else{
+           ecosystem.getUserAccountDirectory().updateUserAccount(userAccount,txtCustomerName.getText(),txtCustomerUserName.getText(),txtCustomerPassword.getText(),null,null);
         displayRestaurantTable();
         txtCustomerName.setText("");
         txtCustomerUserName.setText("");
         txtCustomerPassword.setText("");
+        } 
+        
     }//GEN-LAST:event_btnRestaurantSaveActionPerformed
 
     private void btnRestaurantUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurantUpdateActionPerformed
@@ -211,27 +216,31 @@ public class ManageRestaurant extends javax.swing.JPanel {
     private void btnRestaurantDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurantDeleteActionPerformed
         // TODO add your handling code here:
         int focusRow = tblRestaurant.getSelectedRow();
-        if(focusRow >= 0){
-            int focusButton = JOptionPane.YES_NO_OPTION;
-            int focusResult = JOptionPane.showConfirmDialog(null, "Confirm delete?","Warning",focusButton);
-            if(focusResult == JOptionPane.YES_OPTION){
+        if(focusRow>=0){
+            int selectionButton = JOptionPane.YES_NO_OPTION;
+            int selectionResult = JOptionPane.showConfirmDialog(null, "Confirm delete?","Warning",selectionButton);
+            if(selectionResult == JOptionPane.YES_OPTION){
                 String username= (String) tblRestaurant.getValueAt(focusRow, 1);
-                String password= (String) tblRestaurant.getValueAt(focusRow, 2);
-                UserAccount user=ecosystem.getUserAccountDirectory().authenticateUser(username, password);
+                String pwd= (String) tblRestaurant.getValueAt(focusRow, 2);
+                UserAccount user=ecosystem.getUserAccountDirectory().authenticateUser(username, pwd);
 
-                ecosystem.getUserAccountDirectory().deleteUserAccount(userAccount);
-                ecosystem.getCustomerDirectory().deleteCustomer(userAccount.getUsername());
+               
+                ecosystem.getUserAccountDirectory().deleteUserAccount(user);
+                ecosystem.getRestaurantDirectory().deleteRestaurant(user.getUsername());
                 displayRestaurantTable();
-            }else{
-                JOptionPane.showMessageDialog(null, "Please select a restaurant to delete the restaurant account");
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Please select a restaurant to delete the account");
         }
     }//GEN-LAST:event_btnRestaurantDeleteActionPerformed
 
     private void btnRestaurantCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurantCreateActionPerformed
         // TODO add your handling code here:
-        if(ecosystem.getUserAccountDirectory().checkIfUsernameIsUnique(txtCustomerUserName.getText())){
-            UserAccount userAcc = ecosystem.getUserAccountDirectory().createUserAccount(txtCustomerName.getText(),txtCustomerUserName.getText(),txtCustomerPassword.getText(),null ,new AdminRole());
+        if(txtCustomerName.getText().equals("") || txtCustomerUserName.getText().equals("") || txtCustomerPassword.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Please Enter all fields");
+        }else{
+            if(ecosystem.getUserAccountDirectory().checkIfUsernameIsUnique(txtCustomerUserName.getText())){
+            UserAccount userAcc = ecosystem.getUserAccountDirectory().createUserAccount(txtCustomerName.getText(),txtCustomerUserName.getText(),txtCustomerPassword.getText(),null,null,null ,new AdminRole());
             Restaurant restaurant = ecosystem.getRestaurantDirectory().createRestaurant(txtCustomerUserName.getText());
             displayRestaurantTable();
             System.out.println("1");
@@ -241,6 +250,7 @@ public class ManageRestaurant extends javax.swing.JPanel {
         }else{
             JOptionPane.showMessageDialog(null, "Restaurant Username is not unique");
         }
+        } 
     }//GEN-LAST:event_btnRestaurantCreateActionPerformed
 
     private void btnRestaurantBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurantBackActionPerformed

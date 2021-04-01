@@ -17,9 +17,28 @@ public class UserAccount {
     private String username;
     private String name;
     private String password;
+    private String userAddress;
+    private String userPhone;
     private Employee employee;
     private Role role;
     private WorkQueue workQueue;
+
+    public String getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
+    
 
     public String getName() {
         return name;

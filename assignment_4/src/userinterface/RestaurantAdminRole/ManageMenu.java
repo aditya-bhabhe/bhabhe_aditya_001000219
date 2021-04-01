@@ -8,6 +8,7 @@ package userinterface.RestaurantAdminRole;
 import Business.EcoSystem;
 import Business.Restaurant.Dish;
 import Business.Restaurant.Restaurant;
+import Business.Role.AdminRole;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -193,12 +194,16 @@ public class ManageMenu extends javax.swing.JPanel {
 
     private void btnCustomerCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerCreateActionPerformed
         // TODO add your handling code here:
-        for(Restaurant restaurant : ecosystem.getRestaurantDirectory().getRestaurantDirectory()){
+        if(txtCustomerName.getText().equals("") || txtCustomerUserName.getText().equals("") || txtCustomerPassword.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Please Enter all fields");
+        }else{
+            for(Restaurant restaurant : ecosystem.getRestaurantDirectory().getRestaurantDirectory()){
             if(restaurant.getRestaurantUserName().equals(userAccount.getUsername())){
                 dish = ecosystem.getRestaurantDirectory().addMenu(restaurant, txtCustomerName.getText(), txtCustomerUserName.getText(), txtCustomerPassword.getText());
-                System.out.println("Exception 2");
             }
         }
+        } 
+        
         
         displayMenu();
     }//GEN-LAST:event_btnCustomerCreateActionPerformed

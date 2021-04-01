@@ -29,6 +29,9 @@ public class RestaurantInformation extends javax.swing.JPanel {
         this.ecosystem = ecosystem;
         this.userContainer = userContainer;
         displayFields();
+        txtCustomerName.setEnabled(false);
+       txtCustomerPassword.setEnabled(false);
+       txtCustomerUserName.setEnabled(false);
     }
     
     public void displayFields(){
@@ -125,6 +128,13 @@ public class RestaurantInformation extends javax.swing.JPanel {
 
         lblCustomer.setText("Restaurant User Name :");
         add(lblCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 120, 20));
+
+        txtCustomer.setEditable(false);
+        txtCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCustomerActionPerformed(evt);
+            }
+        });
         add(txtCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 260, 30));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -164,6 +174,10 @@ public class RestaurantInformation extends javax.swing.JPanel {
         CardLayout card = (CardLayout) userContainer.getLayout();
         card.previous(userContainer);
     }//GEN-LAST:event_btnInfoBackActionPerformed
+
+    private void txtCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCustomerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCustomerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

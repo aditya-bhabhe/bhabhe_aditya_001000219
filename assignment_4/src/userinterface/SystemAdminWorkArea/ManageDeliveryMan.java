@@ -7,6 +7,8 @@ package userinterface.SystemAdminWorkArea;
 
 import Business.DeliveryMan.DeliveryMan;
 import Business.EcoSystem;
+import Business.Restaurant.Restaurant;
+import Business.Role.AdminRole;
 import Business.Role.DeliverManRole;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -183,11 +185,16 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
 
     private void btnDeliverySaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliverySaveActionPerformed
         // TODO add your handling code here:
-        ecosystem.getUserAccountDirectory().updateUserAccount(userAccount,txtCustomerName.getText(),txtCustomerUserName.getText(),txtCustomerPassword.getText());
+        if(txtCustomerName.getText().equals("") || txtCustomerUserName.getText().equals("") || txtCustomerPassword.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Please Enter all fields");
+        }else{
+            ecosystem.getUserAccountDirectory().updateUserAccount(userAccount,txtCustomerName.getText(),txtCustomerUserName.getText(),txtCustomerPassword.getText(),null,null);
         displayDeliveryTable();
         txtCustomerName.setText("");
         txtCustomerUserName.setText("");
         txtCustomerPassword.setText("");
+        } 
+        
     }//GEN-LAST:event_btnDeliverySaveActionPerformed
 
     private void btnDeliveryUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliveryUpdateActionPerformed
@@ -234,8 +241,11 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
 
     private void btnDeliveryCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliveryCreateActionPerformed
         // TODO add your handling code here:
-        if(ecosystem.getUserAccountDirectory().checkIfUsernameIsUnique(txtCustomerUserName.getText())){
-            UserAccount userAcc = ecosystem.getUserAccountDirectory().createUserAccount(txtCustomerName.getText(),txtCustomerUserName.getText(),txtCustomerPassword.getText(),null ,new DeliverManRole());
+        if(txtCustomerName.getText().equals("") || txtCustomerUserName.getText().equals("") || txtCustomerPassword.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Please Enter all fields");
+        }else{
+            if(ecosystem.getUserAccountDirectory().checkIfUsernameIsUnique(txtCustomerUserName.getText())){
+            UserAccount userAcc = ecosystem.getUserAccountDirectory().createUserAccount(txtCustomerName.getText(),txtCustomerUserName.getText(),txtCustomerPassword.getText(),null,null,null ,new DeliverManRole());
             DeliveryMan deliveryMan = ecosystem.getDeliveryManDirectory().createDeliveryMan(txtCustomerUserName.getText());
             displayDeliveryTable();
             System.out.println("1");
@@ -245,6 +255,8 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
         }else{
             JOptionPane.showMessageDialog(null, "Delivery Man Username is not unique");
         }
+        } 
+        
     }//GEN-LAST:event_btnDeliveryCreateActionPerformed
 
     private void btnDeliveryBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliveryBackActionPerformed
