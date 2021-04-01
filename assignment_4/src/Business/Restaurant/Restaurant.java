@@ -18,6 +18,13 @@ public class Restaurant {
     private String restaurantNumber;
     private ArrayList<Dish> menuList;
     private ArrayList<Order> orderList;
+    
+    public Restaurant(String restaurantUserName){
+        this.restaurantUserName = restaurantUserName;
+        menuList = new ArrayList<Dish>();
+        orderList = new ArrayList<Order>();
+    }
+    
 
     public String getRestaurantName() {
         return restaurantName;
@@ -75,11 +82,7 @@ public class Restaurant {
         this.orderList = orderList;
     }
     
-    public Restaurant(String restaurantUserName){
-        this.restaurantUserName = restaurantUserName;
-        menuList = new ArrayList<Dish>();
-        orderList = new ArrayList<Order>();
-    }
+    
     
     int id = 1;
     public void addOrder(String restaurentName, String customerName, String deliverMan, ArrayList<Dish> Order, String price, String deliveryAddress) {

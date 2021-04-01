@@ -67,6 +67,7 @@ public class RestaurantDirectory {
     }
     
     public Dish addMenu(Restaurant restaurant, String name, String desc, String amt){
+        System.out.println("Exception 3");
         dish = new Dish(name, desc,amt);
         restaurant.addItem(dish);
         return dish;
