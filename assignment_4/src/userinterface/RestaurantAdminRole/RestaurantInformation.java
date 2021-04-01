@@ -5,6 +5,12 @@
  */
 package userinterface.RestaurantAdminRole;
 
+import Business.EcoSystem;
+import Business.Restaurant.Restaurant;
+import Business.UserAccount.UserAccount;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author adity
@@ -14,8 +20,26 @@ public class RestaurantInformation extends javax.swing.JPanel {
     /**
      * Creates new form RestaurantInformation
      */
-    public RestaurantInformation() {
+    private UserAccount userAccount;
+    private EcoSystem ecosystem;
+    private JPanel userContainer;
+    public RestaurantInformation(JPanel userContainer, UserAccount userAccount, EcoSystem ecosystem) {
         initComponents();
+        this.userAccount = userAccount;
+        this.ecosystem = ecosystem;
+        this.userContainer = userContainer;
+        displayFields();
+    }
+    
+    public void displayFields(){
+        for(Restaurant restaurant: ecosystem.getRestaurantDirectory().getRestaurantDirectory()){
+            if(restaurant.getRestaurantUserName().equals(userAccount.getUsername())){
+                txtCustomer.setText(restaurant.getRestaurantUserName());
+                txtCustomerName.setText(restaurant.getRestaurantName());
+                txtCustomerPassword.setText(restaurant.getRestaurantAddress());
+                txtCustomerUserName.setText(restaurant.getRestaurantNumber());
+            }
+        }
     }
 
     /**
@@ -36,6 +60,8 @@ public class RestaurantInformation extends javax.swing.JPanel {
         btnInfoUpdate = new javax.swing.JButton();
         btnInfoSave = new javax.swing.JButton();
         btnInfoBack = new javax.swing.JButton();
+        lblCustomer = new javax.swing.JLabel();
+        txtCustomer = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(214, 208, 200));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -51,7 +77,7 @@ public class RestaurantInformation extends javax.swing.JPanel {
         });
         add(txtCustomerPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, 260, 30));
 
-        lblCustomerPassword.setText("Price :");
+        lblCustomerPassword.setText("Address :");
         add(lblCustomerPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 110, 20));
 
         txtCustomerUserName.addActionListener(new java.awt.event.ActionListener() {
@@ -61,7 +87,7 @@ public class RestaurantInformation extends javax.swing.JPanel {
         });
         add(txtCustomerUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 260, 30));
 
-        lblCustomerUserName.setText("Description :");
+        lblCustomerUserName.setText("Phone Number :");
         add(lblCustomerUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 110, 20));
 
         btnInfoUpdate.setBackground(new java.awt.Color(214, 50, 48));
@@ -96,6 +122,10 @@ public class RestaurantInformation extends javax.swing.JPanel {
             }
         });
         add(btnInfoBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 120, 40));
+
+        lblCustomer.setText("Restaurant User Name :");
+        add(lblCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 120, 20));
+        add(txtCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 260, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtCustomerPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCustomerPasswordActionPerformed
@@ -108,35 +138,24 @@ public class RestaurantInformation extends javax.swing.JPanel {
 
     private void btnInfoUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoUpdateActionPerformed
         // TODO add your handling code here:
-        int focusRow = tblMenu.getSelectedRow();
-        if(focusRow >= 0){
-            int focusButton = JOptionPane.YES_NO_OPTION;
-            int focusResult = JOptionPane.showConfirmDialog(null, "Confirm delete??","Warning",focusButton);
-            if(focusResult == JOptionPane.YES_OPTION){
-
-                for(Restaurant restaurant:ecosystem.getRestaurantDirectory().getRestaurantDirectory()){
-                    if(restaurant.getRestaurantUserName().equals(userAccount.getUsername())){
-                        ecosystem.getRestaurantDirectory().removeMenu(restaurant, dish);
-                        System.out.println("Exception 300");
-                    }
-                }
-                displayMenu();
-            }
-        }else{
-            JOptionPane.showMessageDialog(null, "Please select a dish to proceed for deletion");
-        }
+       txtCustomerName.setEnabled(true);
+       txtCustomerPassword.setEnabled(true);
+       txtCustomerUserName.setEnabled(true);
+       btnInfoUpdate.setEnabled(false);
     }//GEN-LAST:event_btnInfoUpdateActionPerformed
 
     private void btnInfoSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoSaveActionPerformed
         // TODO add your handling code here:
-        for(Restaurant restaurant : ecosystem.getRestaurantDirectory().getRestaurantDirectory()){
+        for(Restaurant restaurant: ecosystem.getRestaurantDirectory().getRestaurantDirectory()){
             if(restaurant.getRestaurantUserName().equals(userAccount.getUsername())){
-                dish = ecosystem.getRestaurantDirectory().addMenu(restaurant, txtCustomerName.getText(), txtCustomerUserName.getText(), txtCustomerPassword.getText());
-                System.out.println("Exception 2");
+                ecosystem.getRestaurantDirectory().updateRestaurant(restaurant, txtCustomerName.getText(), txtCustomerUserName.getText(), txtCustomerPassword.getText());
             }
         }
 
-        displayMenu();
+        txtCustomerName.setEnabled(false);
+       txtCustomerPassword.setEnabled(false);
+       txtCustomerUserName.setEnabled(false);
+       btnInfoUpdate.setEnabled(true);
     }//GEN-LAST:event_btnInfoSaveActionPerformed
 
     private void btnInfoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoBackActionPerformed
@@ -151,9 +170,11 @@ public class RestaurantInformation extends javax.swing.JPanel {
     private javax.swing.JButton btnInfoBack;
     private javax.swing.JButton btnInfoSave;
     private javax.swing.JButton btnInfoUpdate;
+    private javax.swing.JLabel lblCustomer;
     private javax.swing.JLabel lblCustomerName;
     private javax.swing.JLabel lblCustomerPassword;
     private javax.swing.JLabel lblCustomerUserName;
+    private javax.swing.JTextField txtCustomer;
     private javax.swing.JTextField txtCustomerName;
     private javax.swing.JTextField txtCustomerPassword;
     private javax.swing.JTextField txtCustomerUserName;
