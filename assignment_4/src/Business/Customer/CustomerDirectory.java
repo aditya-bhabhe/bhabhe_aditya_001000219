@@ -12,31 +12,34 @@ import java.util.ArrayList;
  * @author harold
  */
 public class CustomerDirectory {
-    private ArrayList<Customer> customerList = new ArrayList();
-    private Customer findCustomer;
-    public ArrayList<Customer> getCustomerList() {
-        return customerList;
+    
+    private ArrayList<Customer> customerDirectory;
+    private Customer customer;
+    
+    public CustomerDirectory(){
+        this.customerDirectory = new ArrayList<Customer>();
     }
 
-    public void setCustomerList(ArrayList<Customer> customerList) {
-        this.customerList = customerList;
+    public ArrayList<Customer> getCustomerDirectory() {
+        return customerDirectory;
     }
-    
-    public Customer addCustomer(String name){
-        for(Customer i : customerList){
-            if(i.getCustomerName() == name){
-                customerList.add(i);
-                findCustomer = i;
-            }
-        }
 
-        return findCustomer;
+    public void setCustomerDirectory(ArrayList<Customer> customerDirectory) {
+        this.customerDirectory = customerDirectory;
     }
     
-    public void removeCustomer(String name){
-        for(Customer i : customerList){
-            if(i.getCustomerName() == name){
-                customerList.remove(i);
+    public Customer createUserAccount(String username){
+        customer = new Customer(username);
+        System.out.println(customer);
+        customerDirectory.add(customer);
+        return customer;
+    }
+    
+    
+    public void deleteCustomer(String username){
+        for(int i=0;i<customerDirectory.size();i++){
+            if(customerDirectory.get(i).getUserName()==username){
+                customerDirectory.remove(i);
             }
         }
     }

@@ -12,8 +12,13 @@ import java.util.ArrayList;
  * @author harold
  */
 public class DeliveryManDirectory {
-    private ArrayList<DeliveryMan> deliveryManDirectory = new ArrayList();
-    private DeliveryMan newDeliveryMan = new DeliveryMan(); 
+    private ArrayList<DeliveryMan> deliveryManDirectory;
+    private DeliveryMan deliveryMan;
+    
+    public DeliveryManDirectory(){
+        this.deliveryManDirectory =  new ArrayList<DeliveryMan>();
+    }
+
     public ArrayList<DeliveryMan> getDeliveryManDirectory() {
         return deliveryManDirectory;
     }
@@ -21,17 +26,28 @@ public class DeliveryManDirectory {
     public void setDeliveryManDirectory(ArrayList<DeliveryMan> deliveryManDirectory) {
         this.deliveryManDirectory = deliveryManDirectory;
     }
-    
-    public DeliveryMan addDeliveryMan(){
-        deliveryManDirectory.add(newDeliveryMan);
-        return newDeliveryMan;
+
+    public DeliveryMan getDeliveryMan() {
+        return deliveryMan;
+    }
+
+    public void setDeliveryMan(DeliveryMan deliveryMan) {
+        this.deliveryMan = deliveryMan;
     }
     
-//    public void removeDeliveryMan(String name){
-//        for(DeliveryMan d : deliveryManDirectory){
-//            if(d.getDeliverManName() == name){
-//                deliveryManDirectory.remove(d);
-//            }
-//        }
-//    }
+    public DeliveryMan createDeliveryMan(String userName){
+        deliveryMan = new DeliveryMan(userName);
+        deliveryManDirectory.add(deliveryMan);
+        return deliveryMan;
+    }
+    
+    public void deleteDeliveryMan(String userName){
+        for(int i=0;i<deliveryManDirectory.size();i++){
+            if(deliveryManDirectory.get(i).getDeliveryUserName() == userName){
+                deliveryManDirectory.remove(i);
+            }
+        }
+    }
+    
+
 }

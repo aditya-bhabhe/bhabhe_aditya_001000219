@@ -5,6 +5,8 @@
  */
 package Business.Customer;
 
+import Business.Restaurant.Dish;
+import Business.Restaurant.Order;
 import java.util.ArrayList;
 
 /**
@@ -12,16 +14,40 @@ import java.util.ArrayList;
  * @author harold
  */
 public class Customer {
-    private String customerName;
+    private String name;
+    private String userName;
+    private ArrayList<Order> orderList;
     private String address;
-    private String phoneNumber;
-
-    public String getCustomerName() {
-        return customerName;
+    private String number;
+    
+    public String getName() {
+        return name;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+    
+    
+    public Customer(String userName){
+        this.userName = userName;
+        orderList=new ArrayList<Order>();
+    }
+
+    public ArrayList<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(ArrayList<Order> orderList) {
+        this.orderList = orderList;
     }
 
     public String getAddress() {
@@ -32,12 +58,26 @@ public class Customer {
         this.address = address;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getNumber() {
+        return number;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setNumber(String number) {
+        this.number = number;
     }
-//    private ArrayList<Order> customerOrderList = new ArrayList();
+    
+    int id = 1;
+    public void addOrder(String restaurentName, String customerName, String deliverMan, ArrayList<Dish> Order, String price, String deliveryAddress) {
+        Order order=new Order();
+        order.setOrderId(String.valueOf(id));
+        order.setCustomerName(customerName);
+        order.setRestaurantName(restaurentName);
+        order.setDeliveryManName(deliverMan);
+        order.setOrder(Order);
+        order.setPrice(price);
+        order.setDeliveryAddress(deliveryAddress);
+        order.setStatus("New Order");
+        orderList.add(order);
+        id++;
+    }
 }
