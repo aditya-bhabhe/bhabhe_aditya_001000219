@@ -161,8 +161,9 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
                     if(a.equals(order)){
                           a.setStatus("Delivered");
                         JOptionPane.showMessageDialog(null, "Status Updated Successfully");
-                        break;
+                        return;
                     }
+                   
                       
    
                 }
