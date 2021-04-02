@@ -20,8 +20,9 @@ public class DeliveryMan {
     private String DeliveryAddress;
     private String DeliveryNumber;
 
-    public DeliveryMan(String userName){
+    public DeliveryMan(String userName, String name){
         this.deliveryUserName = userName;
+        this.deliveryName = name;
         orderList = new ArrayList<Order>();
     }
     

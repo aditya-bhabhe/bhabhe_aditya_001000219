@@ -4,6 +4,7 @@
  */
 package userinterface.DeliveryManRole;
 
+import Business.Customer.Customer;
 import Business.DeliveryMan.DeliveryMan;
 import Business.EcoSystem;
 import Business.Restaurant.Order;
@@ -25,6 +26,7 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private EcoSystem business;
     private UserAccount userAccount;
+    private Order order;
     
     
     /**
@@ -152,11 +154,42 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         {
             
             Order order  = (Order)tblOrderDetails.getValueAt(selectedRow, 0);
-            System.out.println(order);
             order.setStatus("Delivered");
+            for(Customer cust:business.getCustomerDirectory().getCustomerDirectory()){
+            if(order.getCustomerName().equals(cust.getName())){;
+                for(Order a : cust.getOrderList()){
+                    if(a.equals(order)){
+                          a.setStatus("Delivered");
+                        JOptionPane.showMessageDialog(null, "Status Updated Successfully");
+                        break;
+                    }
+                      
+   
+                }
+            }
+        }
             JOptionPane.showMessageDialog(null, "Order delivered");
             
         }
+        
+//        int focusRow = tblRestaurant.getSelectedRow();
+//
+//        if(focusRow >= 0){
+//            String name = (String) tblRestaurant.getValueAt(focusRow, 0);
+//            String username= (String) tblRestaurant.getValueAt(focusRow, 1);
+//            String password= (String) tblRestaurant.getValueAt(focusRow, 2);
+//            userAccount = ecosystem.getUserAccountDirectory().authenticateUser(username, password);
+//
+//            txtCustomerName.setText(name+"");
+//            txtCustomerUserName.setText(username+"");
+//            txtCustomerPassword.setText(password+"");
+//
+//            JOptionPane.showMessageDialog(null,"Please press save button to save the restaurant information after updating the text field");
+//
+//        }
+//        else {
+//            JOptionPane.showMessageDialog(null,"Please select a restaurant to update a profile");
+//        }
         
     }//GEN-LAST:event_processJButtonActionPerformed
 

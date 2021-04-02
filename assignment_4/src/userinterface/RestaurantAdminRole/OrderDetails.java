@@ -114,7 +114,7 @@ public class OrderDetails extends javax.swing.JPanel {
          order.setStatus("Ready to Deliver");
          
         for(Customer cust:ecosystem.getCustomerDirectory().getCustomerDirectory()){
-            if(order.getCustomerName().equals(cust.getName())){
+            if(order.getCustomerName().equals(cust.getName())){;
                 for(Order order : cust.getOrderList()){
                     order.setStatus("Ready to Deliver");
                     JOptionPane.showMessageDialog(null, "Status Updated Successfully");

@@ -227,6 +227,7 @@ public class ManageCustomer extends javax.swing.JPanel {
        }else{
             if(ecosystem.getUserAccountDirectory().checkIfUsernameIsUnique(txtCustomerUserName.getText())){
             UserAccount userAcc = ecosystem.getUserAccountDirectory().createUserAccount(txtCustomerName.getText(),txtCustomerUserName.getText(),txtCustomerPassword.getText(),txtCustomerAddress.getText(),txtCustomerPhone.getText(),null ,new CustomerRole());
+             Customer customer = ecosystem.getCustomerDirectory().createUserAccount(txtCustomerUserName.getText(),txtCustomerName.getText());
             displayCustomerTable();
         }
         } 

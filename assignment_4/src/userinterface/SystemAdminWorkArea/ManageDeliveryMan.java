@@ -229,9 +229,9 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
                 String username= (String) tblDelivery.getValueAt(focusRow, 1);
                 String password= (String) tblDelivery.getValueAt(focusRow, 2);
                 UserAccount user=ecosystem.getUserAccountDirectory().authenticateUser(username, password);
-
-                ecosystem.getUserAccountDirectory().deleteUserAccount(userAccount);
+                System.out.println(userAccount.getUsername());
                 ecosystem.getCustomerDirectory().deleteCustomer(userAccount.getUsername());
+                ecosystem.getUserAccountDirectory().deleteUserAccount(userAccount);
                 displayDeliveryTable();
             }else{
                 JOptionPane.showMessageDialog(null, "Please select a delivery man profile to delete the restaurant account");
@@ -246,7 +246,7 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
         }else{
             if(ecosystem.getUserAccountDirectory().checkIfUsernameIsUnique(txtCustomerUserName.getText())){
             UserAccount userAcc = ecosystem.getUserAccountDirectory().createUserAccount(txtCustomerName.getText(),txtCustomerUserName.getText(),txtCustomerPassword.getText(),null,null,null ,new DeliverManRole());
-            DeliveryMan deliveryMan = ecosystem.getDeliveryManDirectory().createDeliveryMan(txtCustomerUserName.getText());
+            DeliveryMan deliveryMan = ecosystem.getDeliveryManDirectory().createDeliveryMan(txtCustomerUserName.getText(),txtCustomerName.getText());
             displayDeliveryTable();
             System.out.println("1");
             txtCustomerName.setText("");

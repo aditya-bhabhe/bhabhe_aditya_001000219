@@ -69,7 +69,6 @@ public class MenuPanel extends javax.swing.JPanel {
                      row[1] = dishItem.getDishName();
                      row[2] = dishItem.getDishDescription();
                      row[3] = dishItem.getPrice();
-                     sum=sum+Integer.parseInt(dishItem.getPrice());
                      table.addRow(row);
                 }
     }
@@ -231,14 +230,21 @@ public class MenuPanel extends javax.swing.JPanel {
 
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         // TODO add your handling code here:
-        String address=txtLocation.getText();
+        
+        if(txtLocation.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Please enter the location for the delivery");
+        }else{
+             String address=txtLocation.getText();
         restaurant.addOrder(restaurant.getRestaurantName(), userAccount.getUsername(), null, item, String.valueOf(sum) , address);
         for(Customer customer:ecosystem.getCustomerDirectory().getCustomerDirectory()){
             if(userAccount.getUsername().equals(customer.getUserName())){
+                
                 customer.addOrder(restaurant.getRestaurantName(), userAccount.getUsername(), null, item, String.valueOf(sum) , address);
                 JOptionPane.showMessageDialog(null, "You Order placed successfully");
             }
         }
+        }
+        sum = 0;
     }//GEN-LAST:event_btnOrderActionPerformed
 
     private void btnAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd1ActionPerformed
@@ -249,6 +255,7 @@ public class MenuPanel extends javax.swing.JPanel {
         }
         else{
             Dish dish=(Dish)tblMenu.getValueAt(focusRow, 0);
+            sum=sum+Integer.parseInt(dish.getPrice());
             item.add(dish);
             displayCart();
           

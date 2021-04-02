@@ -28,8 +28,8 @@ public class CustomerDirectory {
         this.customerDirectory = customerDirectory;
     }
     
-    public Customer createUserAccount(String username){
-        customer = new Customer(username);
+    public Customer createUserAccount(String username, String name){
+        customer = new Customer(username,name);
         System.out.println(customer);
         customerDirectory.add(customer);
         return customer;
@@ -37,9 +37,10 @@ public class CustomerDirectory {
     
     
     public void deleteCustomer(String username){
-        for(int i=0;i<customerDirectory.size();i++){
-            if(customerDirectory.get(i).getUserName()==username){
-                customerDirectory.remove(i);
+        System.out.println(username);
+        for(Customer cust : customerDirectory){
+            if(cust.getUserName().equals(username)){
+                customerDirectory.remove(cust);
             }
         }
     }
